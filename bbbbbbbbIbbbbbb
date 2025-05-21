@@ -1,0 +1,23 @@
+local json = require("json")
+
+function main(request)
+    local body = request.body
+    local data = json.decode(body)
+    
+    if not data or data.key ~= "jrsqpBI5VZpt6PPnLG-Z" then
+        return {
+            status = 401,
+            headers = { ["Content-Type"] = "application/json" },
+            body = json.encode({ status = "error", message = "Key inválida" })
+        }
+    end
+    
+    -- Lógica da IA: você pode personalizar com data.user, data.game, etc.
+    local flingSpeed = 270
+
+    return {
+        status = 200,
+        headers = { ["Content-Type"] = "application/json" },
+        body = json.encode({ status = "ok", flingSpeed = flingSpeed })
+    }
+end
